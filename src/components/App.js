@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import ReactFileReader from 'react-file-reader';
-// import ReactTable from 'react-table';
-import { CsvToHtmlTable } from 'react-csv-to-table';
-import JsonUpload from './JsonUpload';
-import FileUpload from './FileUpload';
+import CsvUpload from './CsvUpload';
+// import JsonUpload from './JsonUpload';
+// import DisplayCsv from './DisplayCsv';
+// import FileUpload from './FileUpload';
+// import BarChart from './BarChart';
+// import WorldMap from './WorldMap';
+// import SendString from './SendString';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      getReturn: '',
-      postReturn: '',
-      csvData: '',
+      getReturn: '',      
     };
-
-    this.handleTextSubmit = this.handleTextSubmit.bind(this);
-    this.displayCSV = this.displayCSV.bind(this);
   }
 
   componentDidMount() {
@@ -32,64 +29,32 @@ class App extends Component {
     }
   }
 
-  handleTextSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target)
-    const options = {
-      method: 'POST',
-      body: formData,
-    }
-    try {
-      fetch('http://127.0.0.1:5000/form', options).then(results => {
-        return results.json();
-      }).then(data => {
-        this.setState({ postReturn: data });
-        console.log('API post return: ', this.state.postReturn)
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  displayCSV(event) {
-    var reader = new FileReader();
-    reader.readAsText(event[0])
-    reader.onload = (e) => {
-      var csv = e.target.result
-      this.setState({ csvData: csv })
-      console.log('csv datatype ', typeof csv)
-    }
-  }
-
   render() {
     return (
       <div>
         <h1>Machine Learning App with {this.state.getReturn}</h1>
+
         <hr />
 
-        <h2>Send a String</h2>
-        <form onSubmit={this.handleTextSubmit}>
-          <input type="text" name='string-sandwhich' />
-          <button>Send data</button>
-        </form>
+        <h2>Step 1. Upload CSV</h2>
+
+        < CsvUpload />
+        
+        {/* <hr />
+        <SendString />
+        
         <hr />
-
-        <div>
-          <h2>Display CSV</h2>
-          <ReactFileReader handleFiles={this.displayCSV} fileTypes={'.csv'}>
-            <button className='btn'>Upload</button>
-          </ReactFileReader>
-
-          <CsvToHtmlTable
-            data={this.state.csvData}
-            csvDelimiter=','
-          />
-        </div>
+        <DisplayCsv />
+        
         <hr />
-
         <JsonUpload />
+        
         <hr />
         <FileUpload />
+        
+        <hr />
+        <BarChart data={[1,2,3,4]} size={[500,500]} />
+        <WorldMap /> */}
 
       </div>
 
