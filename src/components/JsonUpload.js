@@ -4,8 +4,8 @@ class JsonUpload extends Component {
     constructor(props) {
         super(props);
         this.state = {
-                jsonData: null,
-            
+            jsonData: '',
+
         };
 
         this.handleJsonSubmit = this.handleJsonSubmit.bind(this);
@@ -13,25 +13,31 @@ class JsonUpload extends Component {
 
     handleJsonSubmit(event) {
         event.preventDefault();
-        var jsonData = {
+
+        var jsonTestData = {
             'A': 'one',
             'B': 'two',
             'C': 'three',
+            'D': 'four'
         }
-        const options = {
+
+        var options = {
             method: 'POST',
-            body: JSON.stringify(jsonData),
+            body: JSON.stringify(jsonTestData),
+            headers: {
+                'user-agent': 'Mozilla/4.0 MDN Example',
+                'content-type': 'application/json',
+            },
         }
-        try {
-            fetch('http://127.0.0.1:5000/json', options).then(results => {
-                return results.json();
-            }).then(data => {
-                this.setState({ jsonData: data });
-                console.log('API post return: ', this.state.jsonData)
-            })
-        } catch (error) {
-            console.error(error)
-        }
+
+        fetch('http://127.0.0.1:5000/data', options).then(results => {
+            // console.log(results);
+            return results.json()
+        }).then(data => {
+            console.log('API data return: ', data, typeof(data))
+            this.setState({ jsonData: data });
+            console.log('API state return: ', this.state.jsonData)
+        })
     }
 
     render() {

@@ -21,7 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     try {
-      fetch('http://127.0.0.1:5000/string').then(results => {
+      fetch('http://127.0.0.1:5000/form').then(results => {
         return results.json();
       }).then(data => {
         this.setState({ getReturn: data.language });
@@ -34,13 +34,13 @@ class App extends Component {
 
   handleTextSubmit(event) {
     event.preventDefault();
-    const stringData = new FormData(event.target)
+    const formData = new FormData(event.target)
     const options = {
       method: 'POST',
-      body: stringData,
+      body: formData,
     }
     try {
-      fetch('http://127.0.0.1:5000/string', options).then(results => {
+      fetch('http://127.0.0.1:5000/form', options).then(results => {
         return results.json();
       }).then(data => {
         this.setState({ postReturn: data });
@@ -51,9 +51,9 @@ class App extends Component {
     }
   }
 
-  displayCSV = files => {
+  displayCSV(event) {
     var reader = new FileReader();
-    reader.readAsText(files[0])
+    reader.readAsText(event[0])
     reader.onload = (e) => {
       var csv = e.target.result
       this.setState({ csvData: csv })
