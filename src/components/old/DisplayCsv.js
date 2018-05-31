@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import ReactFileReader from 'react-file-reader';
 import { CsvToHtmlTable } from 'react-csv-to-table';
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
 import CsvUpload from './CsvUpload';
-// import JsonUpload from './JsonUpload';
-// import DisplayCsv from './DisplayCsv';
-// import FileUpload from './FileUpload';
-// import BarChart from './BarChart';
-// import WorldMap from './WorldMap';
-// import SendString from './SendString';
+
+// import JsonUpload from './old/JsonUpload';
+// import DisplayCsv from './old/DisplayCsv';
+// import FileUpload from './old/FileUpload';
+// import SendString from './old/SendString';
+// import BarChart from './viz/BarChart';
+// import WorldMap from './viz/WorldMap';
 
 class App extends Component {
   constructor(props) {
